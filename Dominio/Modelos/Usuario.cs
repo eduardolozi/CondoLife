@@ -15,8 +15,10 @@ namespace Dominio.Modelos
         public string Senha { get; set; }
         public byte Apartamento { get; set; }
         public char? Bloco { get; set; }
-        public TipoDeUsuarioEnum TipoDeUsuario { get; set; }
         public string? Foto { get; set; }
-        public int GrupoId { get; set; }
+        public TipoDeUsuarioEnum TipoDeUsuario { get; set; }
+        public List<Postagem> Postagens { get; set; } = [];
+        public List<Comentario> Comentarios { get; set; } = [];
+        public List<Boleto> Boletos { get; set; } = [];
     }
 }

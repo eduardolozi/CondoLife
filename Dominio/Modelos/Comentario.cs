@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Dominio.Modelos
+﻿namespace Dominio.Modelos
 {
     public class Comentario
     {
@@ -12,5 +6,8 @@ namespace Dominio.Modelos
         public string Mensagem { get; set; }
         public string? Foto { get; set; }
         public int UsuarioId {  get; set; }
+        public Usuario Usuario { get; set; }
+        public int PostagemId { get; set; }
+        public Postagem Postagem { get; set; }
     }
 }

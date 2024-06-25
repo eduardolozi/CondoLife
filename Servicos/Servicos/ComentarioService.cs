@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Aplicacao.Validacoes
+namespace Aplicacao.Servicos
 {
-    public class ValidadorUsuario
+    public class ComentarioService
     {
     }
 }

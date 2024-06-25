@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Aplicacao.Validacoes
 {
-    public class ValidadorVotacao
+    public class ComentarioValidator
     {
     }
 }

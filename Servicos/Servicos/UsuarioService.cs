@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Aplicacao.Servicos
 {
-    public class ServicoVotacao
+    public class UsuarioService
     {
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Dominio.Interfaces
 {
-    public interface IComentarioRepositorio : IRepositorio<Comentario>
+    public interface IVotacaoRepository : IRepository<Votacao>
     {
     }
 }

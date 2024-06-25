@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Aplicacao.Servicos
+namespace Aplicacao.Validacoes
 {
-    public class ServicoPostagem
+    public class UsuarioValidator
     {
     }
 }

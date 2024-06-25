@@ -11,6 +11,6 @@ namespace Dominio.Modelos
         public int Id { get; set; }
         public string Titulo { get; set; }
         public string? Descricao { get; set; }
-        public Dictionary<string, int> Opcoes { get; set; }
+        public string Opcoes { get; set; }
     }
 }

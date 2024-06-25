@@ -10,7 +10,6 @@ namespace Infra
 {
     public class ModuloDeInjecaoDaInfra
     {
-        private static readonly string CadeiaDeConexao = Environment.GetEnvironmentVariable("CONEXAO_BANCO") ?? throw new Exception("Erro ao ler string de conexao");
         public static void RegistrarServicos(IServiceCollection services)
         {
 

@@ -11,6 +11,7 @@ namespace Dominio.Modelos
         public bool FoiPago { get; set; }
         public double Preco {  get; set; }
         public int UsuarioId { get; set; }
+        [JsonIgnore]
         public Usuario? Usuario { get; set; }
     }
 }

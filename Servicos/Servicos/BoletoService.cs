@@ -19,7 +19,6 @@ namespace Aplicacao.Servicos
         {
             try
             {
-                boleto.Usuario = _repositorioUsuario.ObterPorId(boleto.UsuarioId);
                 _repositorioBoleto.Adicionar(boleto);
             }
             catch (Exception ex)

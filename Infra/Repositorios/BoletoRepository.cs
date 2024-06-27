@@ -24,8 +24,9 @@ namespace Infra.Repositorios
 
         public void Editar(Boleto boleto)
         {
+            var boletoNoBanco = ObterPorId(boleto.Id)!;
             _condoLifeContext
-                .Attach(boleto)
+                .Attach(boletoNoBanco)
                 .CurrentValues
                 .SetValues(boleto);
 

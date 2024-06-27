@@ -20,8 +20,9 @@ namespace Infra.Repositorios
 
         public void Editar(Usuario usuario)
         {
+            var usuarioNoBanco = ObterPorId(usuario.Id)!;
             _condoLifeContext
-                .Attach(usuario)
+                .Attach(usuarioNoBanco)
                 .CurrentValues
                 .SetValues(usuario);
 

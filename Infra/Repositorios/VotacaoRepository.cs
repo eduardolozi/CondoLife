@@ -20,12 +20,12 @@ namespace Infra.Repositorios
             throw new NotImplementedException();
         }
 
-        public void ObterPorId(int id)
+        public Votacao ObterPorId(int id)
         {
             throw new NotImplementedException();
         }
 
-        public void ObterTodos()
+        public List<Votacao> ObterTodos()
         {
             throw new NotImplementedException();
         }

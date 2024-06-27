@@ -15,12 +15,12 @@ namespace Infra.Repositorios
             throw new NotImplementedException();
         }
 
-        public void ObterPorId(int id)
+        public Postagem ObterPorId(int id)
         {
             throw new NotImplementedException();
         }
 
-        public void ObterTodos()
+        public List<Postagem> ObterTodos()
         {
             throw new NotImplementedException();
         }

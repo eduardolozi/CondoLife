@@ -1,33 +1,55 @@
 ﻿using Dominio.Interfaces;
 using Dominio.Modelos;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infra.Repositorios
 {
     public class UsuarioRepository : IUsuarioRepository
     {
-        public void Adicionar(Usuario objeto)
+        private readonly CondoLifeContext _condoLifeContext;
+        public UsuarioRepository(CondoLifeContext condoLifeContext)
         {
-            throw new NotImplementedException();
+            _condoLifeContext = condoLifeContext;
         }
 
-        public void Editar(Usuario objeto)
+        public void Adicionar(Usuario usuario)
         {
-            throw new NotImplementedException();
+            _condoLifeContext.Add(usuario);
+            _condoLifeContext.SaveChanges();
         }
 
-        public void ObterPorId(int id)
+        public void Editar(Usuario usuario)
         {
-            throw new NotImplementedException();
+            _condoLifeContext
+                .Attach(usuario)
+                .CurrentValues
+                .SetValues(usuario);
+
+            _condoLifeContext.SaveChanges();
         }
 
-        public void ObterTodos()
+        public Usuario? ObterPorId(int id)
         {
-            throw new NotImplementedException();
+            return _condoLifeContext
+                .Usuarios
+                .AsNoTracking()
+                .FirstOrDefault(x => x.Id == id)
+                ?? throw new Exception("Usuario não encontrado.");
+        }
+
+        public List<Usuario>? ObterTodos()
+        {
+            return _condoLifeContext
+                .Usuarios
+                .AsNoTracking()
+                .ToList();
         }
 
         public void Remover(int id)
         {
-            throw new NotImplementedException();
+            var usuario = ObterPorId(id)!;
+            _condoLifeContext.Remove(usuario);
+            _condoLifeContext.SaveChanges();
         }
     }
 }

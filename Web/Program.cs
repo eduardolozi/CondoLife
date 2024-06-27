@@ -1,11 +1,13 @@
+using Aplicacao;
 using Infra;
 
 var builder = WebApplication.CreateBuilder(args);
 
+ModuloDeInjecaoDaAplicacao.RegistrarServicos(builder.Services);
+ModuloDeInjecaoDaInfra.RegistrarServicos(builder.Services);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-ModuloDeInjecaoDaInfra.RegistrarServicos(builder.Services);
 
 var app = builder.Build();
 

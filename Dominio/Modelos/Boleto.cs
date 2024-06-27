@@ -1,4 +1,7 @@
-﻿namespace Dominio.Modelos
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Text.Json.Serialization;
+
+namespace Dominio.Modelos
 {
     public class Boleto
     {
@@ -8,6 +11,6 @@
         public bool FoiPago { get; set; }
         public double Preco {  get; set; }
         public int UsuarioId { get; set; }
-        public Usuario Usuario { get; set; }
+        public Usuario? Usuario { get; set; }
     }
 }

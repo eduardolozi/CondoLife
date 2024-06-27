@@ -1,4 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Dominio.Interfaces;
+using Dominio.Modelos;
+using Infra.Repositorios;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -12,8 +15,12 @@ namespace Infra
     {
         public static void RegistrarServicos(IServiceCollection services)
         {
-
             services.AddDbContext<CondoLifeContext>();
+            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+            services.AddScoped<IBoletoRepository, BoletoRepository>();
+            services.AddScoped<IPostagemRepository, PostagemRepository>();
+            services.AddScoped<IRepository<Comentario>, ComentarioRepository>();
+            services.AddScoped<IRepository<Votacao>, VotacaoRepository>();
         }
     }
 }

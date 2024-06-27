@@ -1,5 +1,6 @@
 ﻿using Dominio.Interfaces;
 using Dominio.Modelos;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,29 +11,58 @@ namespace Infra.Repositorios
 {
     public class BoletoRepository : IBoletoRepository
     {
-        public void Adicionar(Boleto objeto)
+        private readonly CondoLifeContext _condoLifeContext;
+        public BoletoRepository(CondoLifeContext condoLifeContext) 
         {
-            throw new NotImplementedException();
+            _condoLifeContext = condoLifeContext;
+        }
+        public void Adicionar(Boleto boleto)
+        {
+            _condoLifeContext.Add(boleto);
+            _condoLifeContext.SaveChanges();
         }
 
-        public void Editar(Boleto objeto)
+        public void Editar(Boleto boleto)
         {
-            throw new NotImplementedException();
+            _condoLifeContext
+                .Attach(boleto)
+                .CurrentValues
+                .SetValues(boleto);
+
+            _condoLifeContext.SaveChanges();
         }
 
-        public void ObterPorId(int id)
+        public Boleto? ObterPorId(int id)
         {
-            throw new NotImplementedException();
+            return _condoLifeContext
+                .Boletos
+                .AsNoTracking()
+                .FirstOrDefault(x => x.Id == id)
+                ?? throw new Exception("Boleto não encontrado.");
         }
 
-        public void ObterTodos()
+        public List<Boleto>? ObterTodos()
         {
-            throw new NotImplementedException();
+            return _condoLifeContext
+                .Boletos
+                .AsNoTracking()
+                .ToList();
+        }
+
+        public List<Boleto> ObterBoletosDoUsuario(int idUsuario)
+        {
+            return _condoLifeContext
+                .Boletos
+                .AsNoTracking()
+                .Where(x => x.UsuarioId ==  idUsuario)
+                .ToList();
         }
 
         public void Remover(int id)
         {
-            throw new NotImplementedException();
+            var boleto = ObterPorId(id)!;
+            _condoLifeContext.Remove(boleto);
+            _condoLifeContext.SaveChanges();
         }
     }
 }

@@ -5,7 +5,7 @@
         public void Adicionar(T objeto);
         public void Editar(T objeto);
         public void Remover(int id);
-        public void ObterTodos();
-        public void ObterPorId(int id);
+        public List<T>? ObterTodos();
+        public T? ObterPorId(int id);
     }
 }

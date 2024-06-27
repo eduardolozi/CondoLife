@@ -60,6 +60,7 @@ namespace Aplicacao.Servicos
                 {
                     usuario.Boletos.AddRange(_repositorioBoleto.ObterBoletosDoUsuario(usuario.Id));
                 }
+                var x = usuarios[0].Boletos[0].Usuario;
                 return usuarios;
             }
             catch(Exception ex)

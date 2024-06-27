@@ -8,14 +8,18 @@ using System.Threading.Tasks;
 
 namespace Aplicacao.Servicos
 {
-    public class BoletoService(IBoletoRepository repositorioBoleto)
+    public class BoletoService(
+        IBoletoRepository repositorioBoleto,
+        IUsuarioRepository repositorioUsuario)
     {
         private readonly IBoletoRepository _repositorioBoleto = repositorioBoleto;
+        private readonly IUsuarioRepository _repositorioUsuario = repositorioUsuario;
 
         public void Adicionar(Boleto boleto)
         {
             try
             {
+                boleto.Usuario = _repositorioUsuario.ObterPorId(boleto.UsuarioId);
                 _repositorioBoleto.Adicionar(boleto);
             }
             catch (Exception ex)

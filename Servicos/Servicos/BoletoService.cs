@@ -8,13 +8,9 @@ using System.Threading.Tasks;
 
 namespace Aplicacao.Servicos
 {
-    public class BoletoService
+    public class BoletoService(IBoletoRepository repositorioBoleto)
     {
-        private readonly IBoletoRepository _repositorioBoleto;
-        public BoletoService(IBoletoRepository repositorioBoleto)
-        {
-            _repositorioBoleto = repositorioBoleto;
-        }
+        private readonly IBoletoRepository _repositorioBoleto = repositorioBoleto;
 
         public void Adicionar(Boleto boleto)
         {

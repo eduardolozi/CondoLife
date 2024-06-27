@@ -8,17 +8,12 @@ using System.Threading.Tasks;
 
 namespace Aplicacao.Servicos
 {
-    public class UsuarioService
+    public class UsuarioService(
+        IUsuarioRepository repositorioUsuario,
+        IBoletoRepository repositorioBoleto)
     {
-        private readonly IUsuarioRepository _repositorioUsuario;
-        private readonly IBoletoRepository _repositorioBoleto;
-        public UsuarioService(
-            IUsuarioRepository repositorioUsuario,
-            IBoletoRepository repositorioBoleto) 
-        {
-            _repositorioUsuario = repositorioUsuario;
-            _repositorioBoleto = repositorioBoleto;
-        }
+        private readonly IUsuarioRepository _repositorioUsuario = repositorioUsuario;
+        private readonly IBoletoRepository _repositorioBoleto = repositorioBoleto;
 
         public void Adicionar(Usuario usuario)
         {

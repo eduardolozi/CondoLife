@@ -1,33 +1,56 @@
 ﻿using Dominio.Interfaces;
 using Dominio.Modelos;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infra.Repositorios
 {
     public class PostagemRepository : IPostagemRepository
     {
-        public void Adicionar(Postagem objeto)
+        private readonly CondoLifeContext _condoLifeContext;
+        public PostagemRepository(CondoLifeContext condoLifeContext) 
         {
-            throw new NotImplementedException();
+            _condoLifeContext = condoLifeContext;
         }
 
-        public void Editar(Postagem objeto)
+        public void Adicionar(Postagem postagem)
         {
-            throw new NotImplementedException();
+            _condoLifeContext.Add(postagem);
+            _condoLifeContext.SaveChanges();
         }
 
-        public Postagem ObterPorId(int id)
+        public void Editar(Postagem postagem)
         {
-            throw new NotImplementedException();
+            var postagemNoBanco = ObterPorId(postagem.Id)!;
+            _condoLifeContext
+                .Attach(postagemNoBanco)
+                .CurrentValues
+                .SetValues(postagem);
+
+            _condoLifeContext.SaveChanges();
+        }
+
+        public Postagem? ObterPorId(int id)
+        {
+            return _condoLifeContext
+                .Postagens
+                .AsNoTracking()
+                .First(x => x.Id == id)
+                ?? throw new Exception("Postagem não encontrada.");
         }
 
         public List<Postagem> ObterTodos()
         {
-            throw new NotImplementedException();
+            return _condoLifeContext
+                .Postagens
+                .AsNoTracking()
+                .ToList();
         }
 
         public void Remover(int id)
         {
-            throw new NotImplementedException();
+            var postagem = ObterPorId(id)!;
+            _condoLifeContext.Remove(postagem);
+            _condoLifeContext.SaveChanges();
         }
     }
 }

@@ -8,12 +8,9 @@ using System.Threading.Tasks;
 
 namespace Aplicacao.Servicos
 {
-    public class UsuarioService(
-        IUsuarioRepository repositorioUsuario,
-        IBoletoRepository repositorioBoleto)
+    public class UsuarioService(IUsuarioRepository repositorioUsuario)
     {
         private readonly IUsuarioRepository _repositorioUsuario = repositorioUsuario;
-        private readonly IBoletoRepository _repositorioBoleto = repositorioBoleto;
 
         public void Adicionar(Usuario usuario)
         {
@@ -27,10 +24,11 @@ namespace Aplicacao.Servicos
             }
         }
 
-        public void Editar(Usuario usuario)
+        public void Editar(int id, Usuario usuario)
         {
             try
             {
+                usuario.Id = id;
                 _repositorioUsuario.Editar(usuario);
             }
             catch(Exception ex)
@@ -55,12 +53,7 @@ namespace Aplicacao.Servicos
         {
             try
             {
-                var usuarios = _repositorioUsuario.ObterTodos();
-                foreach(var usuario in usuarios!)
-                {
-                    usuario.Boletos.AddRange(_repositorioBoleto.ObterBoletosDoUsuario(usuario.Id));
-                }
-                return usuarios;
+                return _repositorioUsuario.ObterTodos();
             }
             catch(Exception ex)
             {

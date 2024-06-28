@@ -37,9 +37,9 @@ namespace Web.Controllers
         }
 
         [HttpPatch("usuario/{id}")]
-        public OkResult Atualizar([FromBody] Usuario usuario)
+        public OkResult Atualizar([FromRoute] int id, [FromBody] Usuario usuario)
         {
-            _servicoUsuario.Editar(usuario);
+            _servicoUsuario.Editar(id, usuario);
             return Ok();
         }
 

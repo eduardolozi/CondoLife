@@ -8,12 +8,9 @@ using System.Threading.Tasks;
 
 namespace Aplicacao.Servicos
 {
-    public class BoletoService(
-        IBoletoRepository repositorioBoleto,
-        IUsuarioRepository repositorioUsuario)
+    public class BoletoService(IBoletoRepository repositorioBoleto)
     {
         private readonly IBoletoRepository _repositorioBoleto = repositorioBoleto;
-        private readonly IUsuarioRepository _repositorioUsuario = repositorioUsuario;
 
         public void Adicionar(Boleto boleto)
         {
@@ -27,10 +24,11 @@ namespace Aplicacao.Servicos
             }
         }
 
-        public void Editar(Boleto boleto)
+        public void Editar(int id, Boleto boleto)
         {
             try
             {
+                boleto.Id = id;
                 _repositorioBoleto.Editar(boleto);
             }
             catch (Exception ex)
@@ -46,6 +44,18 @@ namespace Aplicacao.Servicos
                 return _repositorioBoleto.ObterPorId(id);
             }
             catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex);
+            }
+        }
+
+        public List<Boleto>? ObterBoletosDoUsuario(int idUsuario)
+        {
+            try
+            {
+                return _repositorioBoleto.ObterBoletosDoUsuario(idUsuario);
+            }
+            catch(Exception ex)
             {
                 throw new Exception(ex.Message, ex);
             }

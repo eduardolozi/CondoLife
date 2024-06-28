@@ -34,7 +34,7 @@ namespace Infra.Repositorios
             return _condoLifeContext
                 .Usuarios
                 .AsNoTracking()
-                .FirstOrDefault(x => x.Id == id)
+                .First(x => x.Id == id)
                 ?? throw new Exception("Usuario não encontrado.");
         }
 

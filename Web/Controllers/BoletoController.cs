@@ -28,6 +28,13 @@ namespace Web.Controllers
             var boleto = _servicoBoleto.ObterPorId(id);
             return Ok(boleto);
         }
+        
+        [HttpGet("boletos-usuario/{idUsuario}")]
+        public OkObjectResult ObterBoletosDoUsuario([FromRoute] int idUsuario)
+        {
+            var boletos = _servicoBoleto.ObterBoletosDoUsuario(idUsuario);
+            return Ok(boletos);
+        }
 
         [HttpPost("boleto")]
         public CreatedResult Adicionar([FromBody] Boleto boleto)
@@ -37,9 +44,9 @@ namespace Web.Controllers
         }
 
         [HttpPatch("boleto/{id}")]
-        public OkResult Atualizar([FromBody] Boleto boleto)
+        public OkResult Atualizar([FromRoute] int id, [FromBody] Boleto boleto)
         {
-            _servicoBoleto.Editar(boleto);
+            _servicoBoleto.Editar(id, boleto);
             return Ok();
         }
 

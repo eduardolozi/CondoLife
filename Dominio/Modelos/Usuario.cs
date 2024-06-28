@@ -18,8 +18,11 @@ namespace Dominio.Modelos
         public char? Bloco { get; set; }
         public string? Foto { get; set; }
         public TipoDeUsuarioEnum TipoDeUsuario { get; set; }
-        public List<Postagem> Postagens { get; set; } = [];
-        public List<Comentario> Comentarios { get; set; } = [];
-        public List<Boleto> Boletos { get; set; } = [];
+        [JsonIgnore]
+        public List<Postagem>? Postagens { get; set; } = [];
+        [JsonIgnore]
+        public List<Comentario>? Comentarios { get; set; } = [];
+        [JsonIgnore]
+        public List<Boleto>? Boletos { get; set; } = [];
     }
 }

@@ -1,11 +1,9 @@
 ﻿using Aplicacao.Servicos;
 using Dominio.Modelos;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
-using StackExchange.Redis;
-using System.Text.Json;
 using System.Text;
+using System.Text.Json;
 
 namespace Web.Controllers
 {
@@ -18,10 +16,17 @@ namespace Web.Controllers
         private readonly IDistributedCache _redis = redis;
 
         [HttpGet("comentarios")]
-        public async Task<OkObjectResult> ObterTodos()
+        public OkObjectResult ObterTodos()
+        {
+            var comentarios = _servicoComentario.ObterTodos();
+            return Ok(comentarios);
+        }
+
+        [HttpGet("comentarios/{idPostagem}")]
+        public async Task<OkObjectResult> ObterComentariosDaPostagem([FromRoute] int idPostagem)
         {
             List<Comentario>? comentarios;
-            const string CacheKey = "comentarios";
+            string CacheKey = $"comentarios{idPostagem}";
 
             var comentariosNoRedis = await _redis.GetAsync(CacheKey);
             if (comentariosNoRedis != null)
@@ -30,7 +35,7 @@ namespace Web.Controllers
                 return Ok(comentarios);
             }
 
-            comentarios = _servicoComentario.ObterTodos();
+            comentarios = _servicoComentario.ObterComentariosDaPostagem(idPostagem);
             if (comentarios != null)
             {
                 var jsonComentarios = JsonSerializer.Serialize<List<Comentario>>(comentarios);
@@ -43,6 +48,7 @@ namespace Web.Controllers
 
             return Ok(comentarios);
         }
+
 
         [HttpGet("comentario/{id}")]
         public OkObjectResult ObterPorId([FromRoute] int id)

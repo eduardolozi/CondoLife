@@ -1,5 +1,6 @@
 ﻿using Dominio.Interfaces;
 using Dominio.Modelos;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,31 +9,48 @@ using System.Threading.Tasks;
 
 namespace Infra.Repositorios
 {
-    public class VotacaoRepository : IVotacaoRepository
+    public class VotacaoRepository(CondoLifeContext condoLifeContext) : IVotacaoRepository
     {
-        public void Adicionar(Votacao objeto)
+        private readonly CondoLifeContext _condoLifeContext = condoLifeContext;
+
+        public void Adicionar(Votacao votacao)
         {
-            throw new NotImplementedException();
+            _condoLifeContext.Add(votacao);
+            _condoLifeContext.SaveChanges();
         }
 
-        public void Editar(Votacao objeto)
+        public void Editar(Votacao votacao)
         {
-            throw new NotImplementedException();
+            var votacaoNoBanco = ObterPorId(votacao.Id);
+            _condoLifeContext
+                .Attach(votacaoNoBanco)
+                .CurrentValues
+                .SetValues(votacao);
+            _condoLifeContext.SaveChanges();
         }
 
         public Votacao ObterPorId(int id)
         {
-            throw new NotImplementedException();
+            return _condoLifeContext
+                .Votacoes
+                .AsNoTracking()
+                .First(x => x.Id == id)
+                ?? throw new Exception("Votação não encontrada.");
         }
 
-        public List<Votacao> ObterTodos()
+        public List<Votacao>? ObterTodos()
         {
-            throw new NotImplementedException();
+            return _condoLifeContext
+                .Votacoes
+                .AsNoTracking()
+                .ToList();
         }
 
         public void Remover(int id)
         {
-            throw new NotImplementedException();
+            var votacao = ObterPorId(id);
+            _condoLifeContext.Remove(votacao);
+            _condoLifeContext.SaveChanges();
         }
     }
 }

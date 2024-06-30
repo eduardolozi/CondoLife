@@ -1,10 +1,5 @@
 ﻿using Dominio.Interfaces;
 using Dominio.Modelos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Aplicacao.Servicos
 {
@@ -56,6 +51,18 @@ namespace Aplicacao.Servicos
                 return _repositorioComentario.ObterTodos();
             }
             catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex);
+            }
+        }
+
+        public List<Comentario>? ObterComentariosDaPostagem(int idPostagem)
+        {
+            try
+            {
+                return _repositorioComentario.ObterComentariosDaPostagem(idPostagem);
+            }
+            catch(Exception ex)
             {
                 throw new Exception(ex.Message, ex);
             }

@@ -1,6 +1,5 @@
 ﻿using Aplicacao.Servicos;
 using Dominio.Modelos;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Controllers

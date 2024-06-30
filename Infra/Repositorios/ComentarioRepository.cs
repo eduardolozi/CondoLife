@@ -41,6 +41,15 @@ namespace Infra.Repositorios
                 .ToList();
         }
 
+        public List<Comentario>? ObterComentariosDaPostagem(int idPostagem)
+        {
+            return _condoLifeContext
+                .Comentarios
+                .AsNoTracking()
+                .Where(x => x.PostagemId == idPostagem)
+                .ToList();
+        }
+
         public void Remover(int id)
         {
             var comentario = ObterPorId(id);

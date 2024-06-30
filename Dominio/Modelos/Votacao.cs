@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Dominio.Modelos
+﻿namespace Dominio.Modelos
 {
     public class Votacao
     {
@@ -12,5 +6,7 @@ namespace Dominio.Modelos
         public string Titulo { get; set; }
         public string? Descricao { get; set; }
         public string Opcoes { get; set; }
+        public DateTime DataInicio { get; set; }
+        public DateTime DataFinal { get; set; }
     }
 }

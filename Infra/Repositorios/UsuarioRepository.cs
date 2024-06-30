@@ -20,7 +20,7 @@ namespace Infra.Repositorios
 
         public void Editar(Usuario usuario)
         {
-            var usuarioNoBanco = ObterPorId(usuario.Id)!;
+            var usuarioNoBanco = ObterPorId(usuario.Id);
             _condoLifeContext
                 .Attach(usuarioNoBanco)
                 .CurrentValues
@@ -29,7 +29,7 @@ namespace Infra.Repositorios
             _condoLifeContext.SaveChanges();
         }
 
-        public Usuario? ObterPorId(int id)
+        public Usuario ObterPorId(int id)
         {
             return _condoLifeContext
                 .Usuarios
@@ -48,7 +48,7 @@ namespace Infra.Repositorios
 
         public void Remover(int id)
         {
-            var usuario = ObterPorId(id)!;
+            var usuario = ObterPorId(id);
             _condoLifeContext.Remove(usuario);
             _condoLifeContext.SaveChanges();
         }

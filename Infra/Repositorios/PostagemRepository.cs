@@ -20,7 +20,7 @@ namespace Infra.Repositorios
 
         public void Editar(Postagem postagem)
         {
-            var postagemNoBanco = ObterPorId(postagem.Id)!;
+            var postagemNoBanco = ObterPorId(postagem.Id);
             _condoLifeContext
                 .Attach(postagemNoBanco)
                 .CurrentValues
@@ -29,7 +29,7 @@ namespace Infra.Repositorios
             _condoLifeContext.SaveChanges();
         }
 
-        public Postagem? ObterPorId(int id)
+        public Postagem ObterPorId(int id)
         {
             return _condoLifeContext
                 .Postagens
@@ -48,7 +48,7 @@ namespace Infra.Repositorios
 
         public void Remover(int id)
         {
-            var postagem = ObterPorId(id)!;
+            var postagem = ObterPorId(id);
             _condoLifeContext.Remove(postagem);
             _condoLifeContext.SaveChanges();
         }

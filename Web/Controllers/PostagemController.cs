@@ -43,10 +43,27 @@ namespace Web.Controllers
         }
 
         [HttpGet("postagem/{id}")]
-        public OkObjectResult ObterPorId([FromRoute] int id)
+        public async Task<OkObjectResult>ObterPorId([FromRoute] int id)
         {
-            var usuario = _servicoPostagem.ObterPorId(id);
-            return Ok(usuario);
+            Postagem? postagem;
+            var cacheKey = $"postagem{id}";
+
+            var postagemNoRedis = await _redis.GetAsync(cacheKey);
+            if(postagemNoRedis != null)
+            {
+                postagem = JsonSerializer.Deserialize<Postagem>(postagemNoRedis);
+                return Ok(postagem);
+            }
+
+            postagem = _servicoPostagem.ObterPorId(id);
+            var jsonPostagem = JsonSerializer.Serialize(postagem);
+            var bytesPostagem = Encoding.UTF8.GetBytes(jsonPostagem);
+            var options = new DistributedCacheEntryOptions()
+                          .SetAbsoluteExpiration(DateTime.Now.AddMinutes(10))
+                          .SetSlidingExpiration(TimeSpan.FromMinutes(2));
+            await _redis.SetAsync(cacheKey, bytesPostagem, options);
+
+            return Ok(postagem);
         }
 
         [HttpPost("postagem")]

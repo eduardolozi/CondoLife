@@ -1,33 +1,51 @@
 ﻿using Dominio.Interfaces;
 using Dominio.Modelos;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infra.Repositorios
 {
-    public class ComentarioRepository : IComentarioRepository
+    public class ComentarioRepository(CondoLifeContext condoLifeContext) : IComentarioRepository
     {
-        public void Adicionar(Comentario objeto)
+        private readonly CondoLifeContext _condoLifeContext = condoLifeContext;
+
+        public void Adicionar(Comentario comentario)
         {
-            throw new NotImplementedException();
+            _condoLifeContext.Add(comentario);
+            _condoLifeContext.SaveChanges();
         }
 
-        public void Editar(Comentario objeto)
+        public void Editar(Comentario comentario)
         {
-            throw new NotImplementedException();
+            var comentarioNoBanco = ObterPorId(comentario.Id);
+            _condoLifeContext
+                .Attach(comentarioNoBanco)
+                .CurrentValues
+                .SetValues(comentario);
+            _condoLifeContext.SaveChanges();
         }
 
         public Comentario ObterPorId(int id)
         {
-            throw new NotImplementedException();
+            return _condoLifeContext
+                .Comentarios
+                .AsNoTracking()
+                .First(x => x.Id == id)
+                ?? throw new Exception("Comentário não encontrado.");
         }
 
-        public List<Comentario> ObterTodos()
+        public List<Comentario>? ObterTodos()
         {
-            throw new NotImplementedException();
+            return _condoLifeContext
+                .Comentarios
+                .AsNoTracking()
+                .ToList();
         }
 
         public void Remover(int id)
         {
-            throw new NotImplementedException();
+            var comentario = ObterPorId(id);
+            _condoLifeContext.Remove(comentario);
+            _condoLifeContext.SaveChanges();
         }
     }
 }

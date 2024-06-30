@@ -10,6 +10,7 @@ namespace Dominio.Modelos
         public DateTime DataVencimento { get; set; }
         public bool FoiPago { get; set; }
         public double Preco {  get; set; }
+        public string? Arquivo {  get; set; }
         public int UsuarioId { get; set; }
         [JsonIgnore]
         public Usuario? Usuario { get; set; }

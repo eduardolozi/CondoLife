@@ -24,7 +24,7 @@ namespace Infra.Repositorios
 
         public void Editar(Boleto boleto)
         {
-            var boletoNoBanco = ObterPorId(boleto.Id)!;
+            var boletoNoBanco = ObterPorId(boleto.Id);
             _condoLifeContext
                 .Attach(boletoNoBanco)
                 .CurrentValues
@@ -33,7 +33,7 @@ namespace Infra.Repositorios
             _condoLifeContext.SaveChanges();
         }
 
-        public Boleto? ObterPorId(int id)
+        public Boleto ObterPorId(int id)
         {
             return _condoLifeContext
                 .Boletos
@@ -61,7 +61,7 @@ namespace Infra.Repositorios
 
         public void Remover(int id)
         {
-            var boleto = ObterPorId(id)!;
+            var boleto = ObterPorId(id);
             _condoLifeContext.Remove(boleto);
             _condoLifeContext.SaveChanges();
         }

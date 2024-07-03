@@ -38,7 +38,7 @@ namespace Infra.Repositorios
             return _condoLifeContext
                 .Boletos
                 .AsNoTracking()
-                .First(x => x.Id == id)
+                .FirstOrDefault(x => x.Id == id)
                 ?? throw new Exception("Boleto não encontrado.");
         }
 

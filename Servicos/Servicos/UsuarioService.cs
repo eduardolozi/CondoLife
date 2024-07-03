@@ -1,16 +1,26 @@
-﻿using Dominio.Interfaces;
+﻿using System.Security.Cryptography;
+using Dominio.Interfaces;
 using Dominio.Modelos;
 
 namespace Aplicacao.Servicos
 {
-    public class UsuarioService(IUsuarioRepository repositorioUsuario)
+    public class UsuarioService(IUsuarioRepository repositorioUsuario,
+        CriptografiaService criptografiaService)
     {
         private readonly IUsuarioRepository _repositorioUsuario = repositorioUsuario;
+        private readonly CriptografiaService _criptografiaService = criptografiaService;
 
         public void Adicionar(Usuario usuario)
         {
             try
             {
+                var chave = new byte[32];
+                var iv = new byte[16];
+                RandomNumberGenerator.Fill(chave);
+                RandomNumberGenerator.Fill(iv);
+                
+                var senhaCriptogradada = _criptografiaService.Criptografar(usuario.Senha, chave, iv);
+                usuario.Senha = Convert.ToBase64String(senhaCriptogradada);
                 _repositorioUsuario.Adicionar(usuario);
             }
             catch (Exception ex)

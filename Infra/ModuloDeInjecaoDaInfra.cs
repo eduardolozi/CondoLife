@@ -19,8 +19,8 @@ namespace Infra
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
             services.AddScoped<IBoletoRepository, BoletoRepository>();
             services.AddScoped<IPostagemRepository, PostagemRepository>();
-            services.AddScoped<IRepository<Comentario>, ComentarioRepository>();
-            services.AddScoped<IRepository<Votacao>, VotacaoRepository>();
+            services.AddScoped<IComentarioRepository, ComentarioRepository>();
+            services.AddScoped<IVotacaoRepository, VotacaoRepository>();
         }
     }
 }

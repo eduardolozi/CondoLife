@@ -29,7 +29,7 @@ namespace Infra.Repositorios
             return _condoLifeContext
                 .Comentarios
                 .AsNoTracking()
-                .First(x => x.Id == id)
+                .FirstOrDefault(x => x.Id == id)
                 ?? throw new Exception("Comentário não encontrado.");
         }
 

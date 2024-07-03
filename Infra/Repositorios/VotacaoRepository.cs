@@ -34,7 +34,7 @@ namespace Infra.Repositorios
             return _condoLifeContext
                 .Votacoes
                 .AsNoTracking()
-                .First(x => x.Id == id)
+                .FirstOrDefault(x => x.Id == id)
                 ?? throw new Exception("Votação não encontrada.");
         }
 

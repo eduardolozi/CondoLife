@@ -18,6 +18,7 @@ namespace Aplicacao
             services.AddScoped<PostagemValidator>();
             services.AddScoped<ComentarioValidator>();
             services.AddScoped<VotacaoValidator>();
+            services.AddScoped<CriptografiaService>();
         }
     }
 }

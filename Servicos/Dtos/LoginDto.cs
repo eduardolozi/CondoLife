@@ -1,4 +1,4 @@
-namespace Aplicacao;
+namespace Aplicacao.Dtos;
 
 public class LoginDto
 {

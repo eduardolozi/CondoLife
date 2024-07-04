@@ -1,5 +1,6 @@
 ﻿using Dominio.Interfaces;
 using Dominio.Modelos;
+using Web.Dtos;
 
 namespace Aplicacao.Servicos
 {
@@ -7,10 +8,20 @@ namespace Aplicacao.Servicos
     {
         private readonly IBoletoRepository _repositorioBoleto = repositorioBoleto;
 
-        public void Adicionar(Boleto boleto)
+        public void Adicionar(BoletoDto boletoDto)
         {
             try
             {
+                var boleto = new Boleto
+                {
+                    Id = 0,
+                    Arquivo = boletoDto.Arquivo,
+                    DataEmissao = boletoDto.DataEmissao,
+                    DataVencimento = boletoDto.DataVencimento,
+                    FoiPago = boletoDto.FoiPago,
+                    Preco = boletoDto.Preco,
+                    UsuarioId = boletoDto.UsuarioId
+                };
                 _repositorioBoleto.Adicionar(boleto);
             }
             catch (Exception ex)
@@ -19,11 +30,20 @@ namespace Aplicacao.Servicos
             }
         }
 
-        public void Editar(int id, Boleto boleto)
+        public void Editar(int id, BoletoDto boletoDto)
         {
             try
             {
-                boleto.Id = id;
+                var boleto = new Boleto
+                {
+                    Id = id,
+                    Arquivo = boletoDto.Arquivo,
+                    DataEmissao = boletoDto.DataEmissao,
+                    DataVencimento = boletoDto.DataVencimento,
+                    FoiPago = boletoDto.FoiPago,
+                    Preco = boletoDto.Preco,
+                    UsuarioId = boletoDto.UsuarioId
+                };
                 _repositorioBoleto.Editar(boleto);
             }
             catch (Exception ex)

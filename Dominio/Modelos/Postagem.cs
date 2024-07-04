@@ -13,7 +13,6 @@ namespace Dominio.Modelos
         public CategoriaPostagemEnum Categoria {  get; set; }
         public List<Comentario>? Comentarios { get; set;}
         public int UsuarioId {  get; set; }
-        [JsonIgnore]
         public Usuario? Usuario { get; set; }
     }
 }

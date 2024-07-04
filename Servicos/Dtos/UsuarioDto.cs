@@ -1,11 +1,10 @@
 ﻿using Dominio.Enums;
-using System.Text.Json.Serialization;
+using Dominio.Modelos;
 
-namespace Dominio.Modelos
+namespace Aplicacao.Dtos
 {
-    public class Usuario
+    public class UsuarioDto
     {
-        public int Id { get; set; }
         public string Nome { get; set; }
         public string Email { get; set; }
         public string Senha { get; set; }
@@ -13,8 +12,5 @@ namespace Dominio.Modelos
         public char? Bloco { get; set; }
         public string? Foto { get; set; }
         public TipoDeUsuarioEnum TipoDeUsuario { get; set; }
-        public List<Postagem>? Postagens { get; set; } = [];
-        public List<Comentario>? Comentarios { get; set; } = [];
-        public List<Boleto>? Boletos { get; set; } = [];
     }
 }

@@ -1,4 +1,4 @@
-using Aplicacao;
+using Aplicacao.Dtos;
 using Aplicacao.Servicos;
 using Microsoft.AspNetCore.Mvc;
 

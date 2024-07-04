@@ -1,4 +1,5 @@
 ﻿using System.Security.Cryptography;
+using Aplicacao.Dtos;
 using Dominio.Interfaces;
 using Dominio.Modelos;
 
@@ -10,10 +11,21 @@ namespace Aplicacao.Servicos
         private readonly IUsuarioRepository _repositorioUsuario = repositorioUsuario;
         private readonly CriptografiaService _criptografiaService = criptografiaService;
 
-        public void Adicionar(Usuario usuario)
+        public void Adicionar(UsuarioDto usuarioDto)
         {
             try
             {
+                var usuario = new Usuario
+                {
+                    Id = 0,
+                    Nome = usuarioDto.Nome,
+                    Foto = usuarioDto.Foto,
+                    Apartamento = usuarioDto.Apartamento,
+                    Bloco = usuarioDto.Bloco,
+                    Email = usuarioDto.Email,
+                    Senha = usuarioDto.Senha,
+                    TipoDeUsuario = usuarioDto.TipoDeUsuario
+                };
                 var chave = new byte[32];
                 var iv = new byte[16];
                 RandomNumberGenerator.Fill(chave);
@@ -29,11 +41,21 @@ namespace Aplicacao.Servicos
             }
         }
 
-        public void Editar(int id, Usuario usuario)
+        public void Editar(int id, UsuarioDto usuarioDto)
         {
             try
             {
-                usuario.Id = id;
+                var usuario = new Usuario
+                {
+                    Id = id,
+                    Nome = usuarioDto.Nome,
+                    Foto = usuarioDto.Foto,
+                    Apartamento = usuarioDto.Apartamento,
+                    Bloco = usuarioDto.Bloco,
+                    Email = usuarioDto.Email,
+                    Senha = usuarioDto.Senha,
+                    TipoDeUsuario = usuarioDto.TipoDeUsuario
+                };
                 _repositorioUsuario.Editar(usuario);
             }
             catch(Exception ex)

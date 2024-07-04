@@ -1,9 +1,11 @@
-﻿using Aplicacao.Servicos;
+﻿using Aplicacao.Dtos;
+using Aplicacao.Servicos;
 using Dominio.Modelos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
 using System.Text;
 using System.Text.Json;
+using Web.Dtos;
 
 namespace Web.Controllers
 {
@@ -67,14 +69,14 @@ namespace Web.Controllers
         }
 
         [HttpPost("postagem")]
-        public CreatedResult Adicionar([FromBody] Postagem postagem)
+        public CreatedResult Adicionar([FromBody] PostagemDto postagem)
         {
             _servicoPostagem.Adicionar(postagem);
             return Created();
         }
 
         [HttpPatch("postagem/{id}")]
-        public OkResult Atualizar([FromRoute] int id, [FromBody] Postagem postagem)
+        public OkResult Atualizar([FromRoute] int id, [FromBody] PostagemDto postagem)
         {
             _servicoPostagem.Editar(id, postagem);
             return Ok();

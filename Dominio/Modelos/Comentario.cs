@@ -1,4 +1,6 @@
-﻿namespace Dominio.Modelos
+﻿using System.Text.Json.Serialization;
+
+namespace Dominio.Modelos
 {
     public class Comentario
     {
@@ -8,6 +10,6 @@
         public int UsuarioId {  get; set; }
         public Usuario Usuario { get; set; }
         public int PostagemId { get; set; }
-        public Postagem Postagem { get; set; }
+        public Postagem? Postagem { get; set; }
     }
 }

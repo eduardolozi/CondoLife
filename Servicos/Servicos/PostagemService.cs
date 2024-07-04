@@ -1,4 +1,5 @@
-﻿using Dominio.Interfaces;
+﻿using Aplicacao.Dtos;
+using Dominio.Interfaces;
 using Dominio.Modelos;
 
 namespace Aplicacao.Servicos
@@ -7,10 +8,20 @@ namespace Aplicacao.Servicos
     {
         private readonly IPostagemRepository _postagemRepository = postagemRepository;
 
-        public void Adicionar(Postagem postagem)
+        public void Adicionar(PostagemDto postagemDto)
         {
             try
             {
+                var postagem = new Postagem
+                {
+                    Id = 0,
+                    Categoria = postagemDto.Categoria,
+                    Descricao = postagemDto.Descricao,
+                    Foto = postagemDto.Foto,
+                    Likes = postagemDto.Likes,
+                    Titulo = postagemDto.Titulo,
+                    UsuarioId = postagemDto.UsuarioId
+                };
                 _postagemRepository.Adicionar(postagem);
             }
             catch (Exception ex)
@@ -19,11 +30,20 @@ namespace Aplicacao.Servicos
             }
         }
 
-        public void Editar(int id, Postagem postagem)
+        public void Editar(int id, PostagemDto postagemDto)
         {
             try
             {
-                postagem.Id = id;
+                var postagem = new Postagem
+                {
+                    Id = id,
+                    Categoria = postagemDto.Categoria,
+                    Descricao = postagemDto.Descricao,
+                    Foto = postagemDto.Foto,
+                    Likes = postagemDto.Likes,
+                    Titulo = postagemDto.Titulo,
+                    UsuarioId = postagemDto.UsuarioId
+                };
                 _postagemRepository.Editar(postagem);
             }
             catch (Exception ex)

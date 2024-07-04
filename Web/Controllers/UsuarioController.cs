@@ -1,6 +1,8 @@
-﻿using Aplicacao.Servicos;
+﻿using Aplicacao.Dtos;
+using Aplicacao.Servicos;
 using Dominio.Modelos;
 using Microsoft.AspNetCore.Mvc;
+using Web.Dtos;
 
 namespace Web.Controllers
 {
@@ -29,14 +31,14 @@ namespace Web.Controllers
         }
 
         [HttpPost("usuario")]
-        public CreatedResult Adicionar([FromBody] Usuario usuario)
+        public CreatedResult Adicionar([FromBody] UsuarioDto usuario)
         {
             _servicoUsuario.Adicionar(usuario);
             return Created();
         }
 
         [HttpPatch("usuario/{id}")]
-        public OkResult Atualizar([FromRoute] int id, [FromBody] Usuario usuario)
+        public OkResult Atualizar([FromRoute] int id, [FromBody] UsuarioDto usuario)
         {
             _servicoUsuario.Editar(id, usuario);
             return Ok();

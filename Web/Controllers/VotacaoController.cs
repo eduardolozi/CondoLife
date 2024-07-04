@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
 using System.Text.Json;
 using System.Text;
+using Web.Dtos;
+using Aplicacao.Dtos;
 
 namespace Web.Controllers
 {
@@ -68,14 +70,14 @@ namespace Web.Controllers
         }
 
         [HttpPost("votacao")]
-        public CreatedResult Adicionar([FromBody] Votacao votacao)
+        public CreatedResult Adicionar([FromBody] VotacaoDto votacao)
         {
             _servicoVotacao.Adicionar(votacao);
             return Created();
         }
 
         [HttpPatch("votacao/{id}")]
-        public OkResult Atualizar([FromRoute] int id, [FromBody] Votacao votacao)
+        public OkResult Atualizar([FromRoute] int id, [FromBody] VotacaoDto votacao)
         {
             _servicoVotacao.Editar(id, votacao);
             return Ok();

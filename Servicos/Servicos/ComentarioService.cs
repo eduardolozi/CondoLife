@@ -1,4 +1,5 @@
-﻿using Dominio.Interfaces;
+﻿using Aplicacao.Dtos;
+using Dominio.Interfaces;
 using Dominio.Modelos;
 
 namespace Aplicacao.Servicos
@@ -7,10 +8,18 @@ namespace Aplicacao.Servicos
     {
         private readonly IComentarioRepository _repositorioComentario = repositorioComentario;
 
-        public void Adicionar(Comentario comentario)
+        public void Adicionar(ComentarioDto comentarioDto)
         {
             try
             {
+                var comentario = new Comentario
+                {
+                    Id = 0,
+                    Foto = comentarioDto.Foto,
+                    Mensagem = comentarioDto.Mensagem,
+                    PostagemId = comentarioDto.PostagemId,
+                    UsuarioId = comentarioDto.UsuarioId,
+                };
                 _repositorioComentario.Adicionar(comentario);
             }
             catch (Exception ex)
@@ -19,11 +28,18 @@ namespace Aplicacao.Servicos
             }
         }
 
-        public void Editar(int id, Comentario comentario)
+        public void Editar(int id, ComentarioDto comentarioDto)
         {
             try
             {
-                comentario.Id = id;
+                var comentario = new Comentario
+                {
+                    Id = id,
+                    Foto = comentarioDto.Foto,
+                    Mensagem = comentarioDto.Mensagem,
+                    PostagemId = comentarioDto.PostagemId,
+                    UsuarioId = comentarioDto.UsuarioId,
+                };
                 _repositorioComentario.Editar(comentario);
             }
             catch (Exception ex)

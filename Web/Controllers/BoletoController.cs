@@ -1,6 +1,7 @@
 ﻿using Aplicacao.Servicos;
 using Dominio.Modelos;
 using Microsoft.AspNetCore.Mvc;
+using Web.Dtos;
 
 namespace Web.Controllers
 {
@@ -36,14 +37,14 @@ namespace Web.Controllers
         }
 
         [HttpPost("boleto")]
-        public CreatedResult Adicionar([FromBody] Boleto boleto)
+        public CreatedResult Adicionar([FromBody] BoletoDto boleto)
         {
             _servicoBoleto.Adicionar(boleto);
             return Created();
         }
 
         [HttpPatch("boleto/{id}")]
-        public OkResult Atualizar([FromRoute] int id, [FromBody] Boleto boleto)
+        public OkResult Atualizar([FromRoute] int id, [FromBody] BoletoDto boleto)
         {
             _servicoBoleto.Editar(id, boleto);
             return Ok();

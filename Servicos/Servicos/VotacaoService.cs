@@ -4,11 +4,11 @@ using Dominio.Modelos;
 
 namespace Aplicacao.Servicos
 {
-    public class VotacaoService(IVotacaoRepository repositorioVotacao)
+    public class VotacaoService(IVotacaoRepository repositorioVotacao, ProducerService<Votacao> producerService)
     {
         private readonly IVotacaoRepository _repositorioVotacao = repositorioVotacao;
-
-        public void Adicionar(VotacaoDto votacaoDto)
+        private readonly ProducerService<Votacao> _producerService = producerService;
+        public async Task Adicionar(VotacaoDto votacaoDto)
         {
             try
             {
@@ -18,10 +18,10 @@ namespace Aplicacao.Servicos
                     DataFinal = votacaoDto.DataFinal,
                     DataInicio = votacaoDto.DataInicio,
                     Descricao = votacaoDto.Descricao,
-                    Opcoes = votacaoDto.Opcoes,
                     Titulo = votacaoDto.Titulo
                 };
-                _repositorioVotacao.Adicionar(votacao);
+                await _producerService.EnviarMensagem(votacao);
+                //_repositorioVotacao.Adicionar(votacao);
             }
             catch (Exception ex)
             {

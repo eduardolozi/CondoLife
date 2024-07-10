@@ -7,6 +7,7 @@ namespace Testes.TesteServicoCriptografia
     public class teste_servico_criptografia : TesteBase
     {
         private readonly CriptografiaService _servicoCriptografia;
+        
         public teste_servico_criptografia()
         {
             _servicoCriptografia = _serviceProvider.GetService<CriptografiaService>()

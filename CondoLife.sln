@@ -11,7 +11,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infra", "Infra\Infra.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web", "Web\Web.csproj", "{F101E102-F96C-4B57-A45C-C402D8070B2B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testes", "Testes\Testes.csproj", "{2112FA82-76E1-41BF-92BB-CB9383199DF1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Testes", "Testes\Testes.csproj", "{2112FA82-76E1-41BF-92BB-CB9383199DF1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Itens de Solução", "Itens de Solução", "{FDB6A050-82A7-4DC9-AB61-A59C8CE05E0C}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

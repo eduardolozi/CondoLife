@@ -70,9 +70,9 @@ namespace Web.Controllers
         }
 
         [HttpPost("votacao")]
-        public CreatedResult Adicionar([FromBody] VotacaoDto votacao)
+        public async Task<CreatedResult> Adicionar([FromBody] VotacaoDto votacao)
         {
-            _servicoVotacao.Adicionar(votacao);
+            await _servicoVotacao.Adicionar(votacao);
             return Created();
         }
 

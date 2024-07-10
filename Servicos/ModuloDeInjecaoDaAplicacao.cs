@@ -1,5 +1,6 @@
 ﻿using Aplicacao.Servicos;
 using Aplicacao.Validacoes;
+using Dominio.Modelos;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Aplicacao
@@ -19,6 +20,7 @@ namespace Aplicacao
             services.AddScoped<ComentarioValidator>();
             services.AddScoped<VotacaoValidator>();
             services.AddScoped<CriptografiaService>();
+            services.AddScoped<ProducerService<Votacao>>();
         }
     }
 }

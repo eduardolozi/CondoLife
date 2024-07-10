@@ -16,5 +16,6 @@ namespace Infra
         public DbSet<Comentario> Comentarios { get; set; }
         public DbSet<Votacao> Votacoes { get; set; }
         public DbSet<Boleto> Boletos { get; set; }
+        public DbSet<OpcaoDeVoto> OpcaoDeVoto { get; set; }
     }
 }

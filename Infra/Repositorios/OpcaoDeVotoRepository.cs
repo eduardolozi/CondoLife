@@ -31,7 +31,7 @@ namespace Infra.Repositorios
                 .OpcaoDeVoto
                 .AsNoTracking()
                 .FirstOrDefault(x => x.Id == id)
-                ?? throw new Exception("Boleto não encontrado.");
+                ?? throw new Exception("Opção de voto não encontrada.");
         }
 
         public List<OpcaoDeVoto>? ObterTodos()

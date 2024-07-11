@@ -8,7 +8,6 @@ namespace Aplicacao.Dtos
 {
     public class OpcaoDeVotoDto
     {
-        public int? Id { get; set; }
         public string Nome { get; set; }
         public int VotacaoId { get; set; }
     }

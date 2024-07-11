@@ -39,7 +39,6 @@ namespace Aplicacao.Servicos
                     DataFinal = votacaoDto.DataFinal,
                     DataInicio = votacaoDto.DataInicio,
                     Descricao = votacaoDto.Descricao,
-                    Opcoes = votacaoDto.Opcoes,
                     Titulo = votacaoDto.Titulo
                 };
                 _repositorioVotacao.Editar(votacao);

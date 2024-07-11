@@ -9,44 +9,44 @@ namespace Web.Controllers
     [ApiController]
     public class OpcaoDeVotoController : ControllerBase
     {
-        private readonly UsuarioService _servicoUsuario;
-        public UsuarioController(UsuarioService servicoUsuario)
+        private readonly OpcaoDeVotoService _opcaoDeVotoService;
+        public OpcaoDeVotoController(OpcaoDeVotoService opcaoDeVotoService)
         {
-            _servicoUsuario = servicoUsuario;
+            _opcaoDeVotoService = opcaoDeVotoService;
         }
 
-        [HttpGet("usuarios")]
+        [HttpGet("opcoes-de-voto")]
         public OkObjectResult ObterTodos()
         {
-            var usuarios = _servicoUsuario.ObterTodos();
-            return Ok(usuarios);
+            var opcoesDeVoto = _opcaoDeVotoService.ObterTodos();
+            return Ok(opcoesDeVoto);
         }
 
-        [HttpGet("usuario/{id}")]
+        [HttpGet("opcao-de-voto/{id}")]
         public OkObjectResult ObterPorId([FromRoute] int id)
         {
-            var usuario = _servicoUsuario.ObterPorId(id);
-            return Ok(usuario);
+            var opcaoDeVoto = _opcaoDeVotoService.ObterPorId(id);
+            return Ok(opcaoDeVoto);
         }
 
-        [HttpPost("usuario")]
-        public CreatedResult Adicionar([FromBody] UsuarioDto usuario)
+        [HttpPost("opcao-de-voto")]
+        public CreatedResult Adicionar([FromBody] OpcaoDeVotoDto opcaoDeVoto)
         {
-            _servicoUsuario.Adicionar(usuario);
+            _opcaoDeVotoService.Adicionar(opcaoDeVoto);
             return Created();
         }
 
-        [HttpPatch("usuario/{id}")]
-        public OkResult Atualizar([FromRoute] int id, [FromBody] UsuarioDto usuario)
+        [HttpPatch("opcao-de-voto/{id}")]
+        public OkResult Atualizar([FromRoute] int id, [FromBody] OpcaoDeVotoDto opcaoDeVoto)
         {
-            _servicoUsuario.Editar(id, usuario);
+            _opcaoDeVotoService.Editar(id, opcaoDeVoto);
             return Ok();
         }
 
-        [HttpDelete("usuario/{id}")]
+        [HttpDelete("opcao-de-voto/{id}")]
         public OkResult Remover([FromRoute] int id)
         {
-            _servicoUsuario.Remover(id);
+            _opcaoDeVotoService.Remover(id);
             return Ok();
         }
     }

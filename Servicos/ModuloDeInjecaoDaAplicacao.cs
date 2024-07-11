@@ -14,6 +14,7 @@ namespace Aplicacao
             services.AddScoped<PostagemService>();
             services.AddScoped<ComentarioService>();
             services.AddScoped<VotacaoService>();
+            services.AddScoped<OpcaoDeVotoService>();
             services.AddScoped<UsuarioValidator>();
             services.AddScoped<BoletoValidator>();
             services.AddScoped<PostagemValidator>();

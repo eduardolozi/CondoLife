@@ -1,13 +1,14 @@
 ﻿using Aplicacao.Dtos;
 using Dominio.Interfaces;
 using Dominio.Modelos;
+using System.Text.Json;
 
 namespace Aplicacao.Servicos
 {
-    public class VotacaoService(IVotacaoRepository repositorioVotacao, ProducerService<Votacao> producerService)
+    public class VotacaoService(IVotacaoRepository repositorioVotacao, ProducerService producerService)
     {
         private readonly IVotacaoRepository _repositorioVotacao = repositorioVotacao;
-        private readonly ProducerService<Votacao> _producerService = producerService;
+        private readonly ProducerService _producerService = producerService;
         public async Task Adicionar(VotacaoDto votacaoDto)
         {
             try
@@ -20,7 +21,8 @@ namespace Aplicacao.Servicos
                     Descricao = votacaoDto.Descricao,
                     Titulo = votacaoDto.Titulo
                 };
-                await _producerService.EnviarMensagem(votacao);
+                var mensagem = JsonSerializer.Serialize(votacao);
+                await _producerService.EnviarMensagem(mensagem);
                 //_repositorioVotacao.Adicionar(votacao);
             }
             catch (Exception ex)

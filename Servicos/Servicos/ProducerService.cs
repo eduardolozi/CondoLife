@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Aplicacao.Servicos
 {
-    public class ProducerService<T> where T : class
+    public class ProducerService
     {
         private readonly ProducerConfig _producerConfig;
         private readonly ParametrosKafka _parametros;
@@ -24,12 +24,11 @@ namespace Aplicacao.Servicos
             _producer = new ProducerBuilder<Null, string>(_producerConfig).Build();
         }
 
-        public async Task EnviarMensagem(T objeto)
+        public async Task EnviarMensagem(string dados)
         {
             try
             {
-                var objetoSerializado = JsonSerializer.Serialize(objeto);
-                var mensagem = new Message<Null, string> { Value = objetoSerializado };
+                var mensagem = new Message<Null, string> { Value = dados };
                 await _producer.ProduceAsync(_parametros.TopicName, mensagem);
             }
             catch(Exception ex)

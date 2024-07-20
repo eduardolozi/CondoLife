@@ -9,11 +9,11 @@ public class LoginService(IUsuarioRepository repositorioUsuario, TokenService to
     private readonly TokenService _tokenService = tokenService;
     private readonly IUsuarioRepository _repositorioUsuario = repositorioUsuario;
 
-    public Usuario Login(LoginDto login)
+    public string Login(LoginDto login)
     {
         login.Senha = login.Senha;
         var usuario = _repositorioUsuario.ObterUsuarioPorCredenciaisDoLogin(login.NomeOuEmail, login.Senha);
         var token =_tokenService.GerarToken(usuario);
-        return usuario;
+        return token;
     }
 }

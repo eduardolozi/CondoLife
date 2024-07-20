@@ -6,6 +6,10 @@ namespace Testes.TesteServicoCriptografia
 {
     public class teste_servico_criptografia : TesteBase
     {
+        private readonly string senha = "kldjhfdsf124@!";
+        private readonly byte[] chave = new byte[32];
+        private readonly byte[] iv = new byte[16];
+        
         private readonly CriptografiaService _servicoCriptografia;
         
         public teste_servico_criptografia()
@@ -17,12 +21,8 @@ namespace Testes.TesteServicoCriptografia
         [Fact]
         public void AoCriptografarSenhaDeveRetornarArrayDeBytesNaoNulo()
         {
-            var senha = "kldjhfdsf124@!";
-            var chave = new byte[32];
-            var iv = new byte[16];
             RandomNumberGenerator.Fill(chave);
             RandomNumberGenerator.Fill(iv);
-
             var senhaCriptografada = _servicoCriptografia.Criptografar(senha, chave, iv);
             Assert.IsType<byte[]>(senhaCriptografada);
             Assert.NotNull(senhaCriptografada);
@@ -31,16 +31,11 @@ namespace Testes.TesteServicoCriptografia
         [Fact]
         public void AoDescriptografarSenhaDeveBaterComSenhaOriginal()
         {
-            var senha = "kldjhfdsf124@!";
-            var chave = new byte[32];
-            var iv = new byte[16];
             RandomNumberGenerator.Fill(chave);
             RandomNumberGenerator.Fill(iv);
-
             var senhaCriptografada = _servicoCriptografia.Criptografar(senha, chave, iv);
             var senhaDescriptograda = _servicoCriptografia.Descriptografar(senhaCriptografada, chave, iv);
             Assert.Equal(senha, senhaDescriptograda);
         }
-
     }
 }

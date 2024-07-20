@@ -21,7 +21,8 @@ namespace Aplicacao
             services.AddScoped<ComentarioValidator>();
             services.AddScoped<VotacaoValidator>();
             services.AddScoped<CriptografiaService>();
-            services.AddScoped<ProducerService<Votacao>>();
+            services.AddScoped<ProducerService>();
+            services.AddScoped<TokenService>();
         }
     }
 }

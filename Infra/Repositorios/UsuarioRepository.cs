@@ -59,14 +59,20 @@ namespace Infra.Repositorios
                 .AsNoTracking()
                 .FirstOrDefault(x => (x.Nome == nomeOuEmail || x.Email == nomeOuEmail))
                 ?? throw new Exception("Usuário não encontrado.");
-            
-            var chave = new byte[32];
-            var iv = new byte[16];
-            RandomNumberGenerator.Fill(chave);
-            RandomNumberGenerator.Fill(iv);
+
+            byte[] key =
+            {
+                0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08,
+                0x09, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16
+            };
+            byte[] iv =
+            {
+                0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08,
+                0x09, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16
+            };
             
             var senhaEmBytes = Convert.FromBase64String(usuarioNoBanco.Senha);
-            var senhaDescriptografada = _criptografiaService.Descriptografar(senhaEmBytes, chave, iv);
+            var senhaDescriptografada = _criptografiaService.Descriptografar(senhaEmBytes, key, iv);
             if(senhaDescriptografada == senha) return usuarioNoBanco;
             throw new Exception("Senha incorreta.");
         }

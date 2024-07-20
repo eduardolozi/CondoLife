@@ -1,6 +1,7 @@
 ﻿using Aplicacao.Dtos;
 using Aplicacao.Servicos;
 using Dominio.Modelos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
 using System.Text;
@@ -60,6 +61,7 @@ namespace Web.Controllers
         }
 
         [HttpPost("comentario")]
+        [Authorize]
         public CreatedResult Adicionar([FromBody] ComentarioDto comentario)
         {
             _servicoComentario.Adicionar(comentario);
@@ -67,6 +69,7 @@ namespace Web.Controllers
         }
 
         [HttpPatch("comentario/{id}")]
+        [Authorize]
         public OkResult Atualizar([FromRoute] int id, [FromBody] ComentarioDto comentario)
         {
             _servicoComentario.Editar(id, comentario);
@@ -74,6 +77,7 @@ namespace Web.Controllers
         }
 
         [HttpDelete("comentario/{id}")]
+        [Authorize]
         public OkResult Remover([FromRoute] int id)
         {
             _servicoComentario.Remover(id);

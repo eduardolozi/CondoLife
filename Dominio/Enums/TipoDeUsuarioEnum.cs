@@ -4,6 +4,7 @@
     {
         Inquilino,
         Dono,
-        Sindico
+        Sindico,
+        Secretario
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Aplicacao.Dtos;
 using Aplicacao.Servicos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,6 +31,7 @@ namespace Web.Controllers
         }
 
         [HttpPost("opcao-de-voto")]
+        [Authorize(Policy = "SINDICO_OU_SECRETARIO")]
         public CreatedResult Adicionar([FromBody] OpcaoDeVotoDto opcaoDeVoto)
         {
             _opcaoDeVotoService.Adicionar(opcaoDeVoto);
@@ -37,6 +39,7 @@ namespace Web.Controllers
         }
 
         [HttpPatch("opcao-de-voto/{id}")]
+        [Authorize(Policy = "SINDICO_OU_SECRETARIO")]
         public OkResult Atualizar([FromRoute] int id, [FromBody] OpcaoDeVotoDto opcaoDeVoto)
         {
             _opcaoDeVotoService.Editar(id, opcaoDeVoto);
@@ -44,6 +47,7 @@ namespace Web.Controllers
         }
 
         [HttpDelete("opcao-de-voto/{id}")]
+        [Authorize(Policy = "SINDICO_OU_SECRETARIO")]
         public OkResult Remover([FromRoute] int id)
         {
             _opcaoDeVotoService.Remover(id);

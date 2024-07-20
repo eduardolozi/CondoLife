@@ -23,6 +23,7 @@ namespace Aplicacao
             services.AddScoped<CriptografiaService>();
             services.AddScoped<ProducerService>();
             services.AddScoped<TokenService>();
+            services.AddScoped<LoginService>();
         }
     }
 }

@@ -7,6 +7,7 @@ using System.Text.Json;
 using System.Text;
 using Web.Dtos;
 using Aplicacao.Dtos;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Web.Controllers
 {
@@ -70,6 +71,7 @@ namespace Web.Controllers
         }
 
         [HttpPost("votacao")]
+        [Authorize(Policy = "SINDICO_OU_SECRETARIO")]
         public async Task<CreatedResult> Adicionar([FromBody] VotacaoDto votacao)
         {
             await _servicoVotacao.Adicionar(votacao);
@@ -77,6 +79,7 @@ namespace Web.Controllers
         }
 
         [HttpPatch("votacao/{id}")]
+        [Authorize(Policy = "SINDICO_OU_SECRETARIO")]
         public OkResult Atualizar([FromRoute] int id, [FromBody] VotacaoDto votacao)
         {
             _servicoVotacao.Editar(id, votacao);
@@ -84,6 +87,7 @@ namespace Web.Controllers
         }
 
         [HttpDelete("votacao/{id}")]
+        [Authorize(Policy = "SINDICO_OU_SECRETARIO")]
         public OkResult Remover([FromRoute] int id)
         {
             _servicoVotacao.Remover(id);

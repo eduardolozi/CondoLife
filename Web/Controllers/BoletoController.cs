@@ -1,5 +1,6 @@
 ﻿using Aplicacao.Servicos;
 using Dominio.Modelos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Web.Dtos;
 
@@ -37,6 +38,7 @@ namespace Web.Controllers
         }
 
         [HttpPost("boleto")]
+        [Authorize(Policy = "SINDICO_OU_SECRETARIO")]
         public CreatedResult Adicionar([FromBody] BoletoDto boleto)
         {
             _servicoBoleto.Adicionar(boleto);
@@ -44,6 +46,7 @@ namespace Web.Controllers
         }
 
         [HttpPatch("boleto/{id}")]
+        [Authorize(Policy = "SINDICO_OU_SECRETARIO")]
         public OkResult Atualizar([FromRoute] int id, [FromBody] BoletoDto boleto)
         {
             _servicoBoleto.Editar(id, boleto);
@@ -51,6 +54,7 @@ namespace Web.Controllers
         }
 
         [HttpDelete("boleto/{id}")]
+        [Authorize(Policy = "SINDICO_OU_SECRETARIO")]
         public OkResult Remover([FromRoute] int id)
         {
             _servicoBoleto.Remover(id);

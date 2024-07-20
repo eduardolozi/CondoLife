@@ -19,6 +19,7 @@ public class CriptografiaService
                 {
                     var dadosEmBytes = Encoding.UTF8.GetBytes(dados);
                     cs.Write(dadosEmBytes, 0, dadosEmBytes.Length);
+                    cs.Flush();
                 }
                 bytesCriptografados = ms.ToArray();
             }
